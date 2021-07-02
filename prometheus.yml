@@ -1,0 +1,23 @@
+scrape_configs:
+- job_name: pushgateway
+  honor_labels: true
+  # basic_auth:
+  #   username: "user"
+  #   password: "123"
+  scrape_interval: 5s
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - localhost:9091
+    labels:
+      app: pushgateway
+
+- job_name: url-shortener
+  scrape_interval: 5s
+  metrics_path: "/internal/metrics"
+  scheme: "https"
+  static_configs:
+  - targets:
+    - localhost:9999
+    labels:
+      app: url-shortener
